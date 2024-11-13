@@ -1,0 +1,160 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author USUARIO
+ */
+public class SistemaGestion {
+    static Scanner scanner = new Scanner(System.in);
+    static ArrayList<String> alumnos = new ArrayList<>();
+    static ArrayList<String> cursos = new ArrayList<>();
+    static ArrayList<String> calificaciones = new ArrayList<>();
+    
+    public static void main(String[] args) {
+        while (true) {
+            mostrarMenu();
+            int opcion = leerOpcion();
+            switch (opcion) {
+                case 1:
+                    vistaAlumnos();
+                    break;
+                case 2:
+                    vistaCursos();
+                    break;
+                case 3:
+                    vistaCalificaciones();
+                    break;
+                case 4:
+                    System.out.println("Saliendo del sistema...");
+                    return;
+                default:
+                    System.out.println("Opción no válida.");
+            }
+        }
+    }
+
+    public static void mostrarMenu() {
+        System.out.println("*** Interfaz Principal ***");
+        System.out.println("1. Vista de Alumnos");
+        System.out.println("2. Vista de Cursos");
+        System.out.println("3. Vista de Calificaciones");
+        System.out.println("4. Salir");
+        System.out.print("Elige una opcion: ");
+    }
+
+    public static int leerOpcion() {
+        while (!scanner.hasNextInt()) {
+            System.out.print("Por favor, ingresa una opcion valida: ");
+            scanner.next(); // Limpiar el buffer
+        }
+        return scanner.nextInt();
+    }
+
+    // Vista de Alumnos
+    public static void vistaAlumnos() {
+        System.out.println("--- Vista de Alumnos ---");
+        System.out.println("1. Agregar Alumno");
+        System.out.println("2. Listar Alumnos");
+        System.out.print("Elige una opcion: ");
+        int opcion = leerOpcion();
+        scanner.nextLine(); // Limpiar el buffer después de leer un número
+
+        switch (opcion) {
+            case 1:
+                System.out.print("Nombre del Alumno: ");
+                String nombreAlumno = scanner.nextLine();
+                System.out.print("ID del Alumno: ");
+                String idAlumno = scanner.nextLine();
+                alumnos.add("ID: " + idAlumno + ", Nombre: " + nombreAlumno);
+                System.out.println("Alumno añadido exitosamente.");
+                break;
+            case 2:
+                System.out.println("Lista de Alumnos:");
+                for (String alumno : alumnos) {
+                    System.out.println(alumno);
+                }
+                break;
+            default:
+                System.out.println("Opcion no valida.");
+        }
+    }
+
+    // Vista de Cursos
+    public static void vistaCursos() {
+        System.out.println("--- Vista de Cursos ---");
+        System.out.println("1. Agregar  Curso");
+        System.out.println("2. Listar Cursos");
+        System.out.print("Elige una opción: ");
+        int opcion = leerOpcion();
+        scanner.nextLine(); // Limpiar el buffer después de leer un número
+
+        switch (opcion) {
+            case 1:
+                System.out.print("Nombre del Curso: ");
+                String nombreCurso = scanner.nextLine();
+                System.out.print("ID del Curso: ");
+                String idCurso = scanner.nextLine();
+                cursos.add("ID: " + idCurso + ", Curso: " + nombreCurso);
+                System.out.println("Curso agregado exitosamente.");
+                break;
+            case 2:
+                System.out.println("Lista de Cursos:");
+                for (String curso : cursos) {
+                    System.out.println(curso);
+                }
+                break;
+            default:
+                System.out.println("Opcion no valida.");
+        }
+    }
+
+    // Vista de Calificaciones
+    public static void vistaCalificaciones() {
+        System.out.println("--- Vista de Calificaciones ---");
+        System.out.println("1. Agregar Calificación");
+        System.out.println("2. Listar Calificaciones");
+        System.out.print("Elige una opción: ");
+        int opcion = leerOpcion();
+        scanner.nextLine(); // Limpiar el buffer después de leer un número
+
+        switch (opcion) {
+            case 1:
+                System.out.print("ID del Alumno: ");
+                String idAlumnoCalif = scanner.nextLine();
+                System.out.print("ID del Curso: ");
+                String idCursoCalif = scanner.nextLine();
+                System.out.print("Calificación (número entre 0 y 100): ");
+                int calificacion = leerCalificacion();
+                if (calificacion >= 0 && calificacion <= 100) {
+                    calificaciones.add("ID Alumno: " + idAlumnoCalif + ", ID Curso: " + idCursoCalif + ", Calificación: " + calificacion);
+                    System.out.println("Calificacion Agregar exitosamente.");
+                } else {
+                    System.out.println("Calificacion fuera de rango. Debe estar entre 0 y 100.");
+                }
+                break;
+            case 2:
+                System.out.println("Lista de Calificaciones:");
+                for (String calificacionRecord : calificaciones) {
+                    System.out.println(calificacionRecord);
+                }
+                break;
+            default:
+                System.out.println("Opcion no valida.");
+        }
+    }
+
+    // Método para leer calificación numérica
+    public static int leerCalificacion() {
+        while (!scanner.hasNextInt()) {
+            System.out.print("Por favor, ingresa una calificacion valida (numero entre 0 y 100): ");
+            scanner.next(); // Limpiar el buffer
+        }
+        return scanner.nextInt();
+    }
+}
